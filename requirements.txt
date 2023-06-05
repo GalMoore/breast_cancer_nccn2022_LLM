@@ -3,4 +3,3 @@ streamlit
 openai
 pypdf
 chromadb
-pycryptodome
