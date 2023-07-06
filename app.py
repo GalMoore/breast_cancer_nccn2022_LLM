@@ -4,6 +4,7 @@ import streamlit as st # Bring in streamlit for UI/app interface
 from langchain.document_loaders import PyPDFLoader # Import PDF document loaders...there's other ones as well!
 from langchain.vectorstores import Chroma # Import chroma as the vector store 
 import PyPDF2
+from io import BytesIO
 
 
 # Import vector store stuff
