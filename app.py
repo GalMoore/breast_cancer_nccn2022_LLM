@@ -25,7 +25,9 @@ llm = OpenAI(temperature=0.1, verbose=True)
 # loader = PyPDFLoader("breast-invasive-patient.pdf")
 # # loader = PyPDFLoader('/content/drive//My Drive/3_MY_WORK/1_My_projects/3b_langchain_experiment/git_repo/LangchainDocuments/gal.pdf')
 uploaded_files = st.sidebar.file_uploader("",accept_multiple_files=True, type=['pdf'])
-
+# Initialize an empty list to store the extracted text from the uploaded files
+data = []
+filenames = []
 if uploaded_files:
     st.sidebar.write("You have uploaded the following files:")
     for file in uploaded_files:
