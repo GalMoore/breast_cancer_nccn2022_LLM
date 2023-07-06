@@ -23,6 +23,28 @@ st.write("yo")
 # Create and load PDF Loader
 # loader = PyPDFLoader("breast-invasive-patient.pdf")
 # # loader = PyPDFLoader('/content/drive//My Drive/3_MY_WORK/1_My_projects/3b_langchain_experiment/git_repo/LangchainDocuments/gal.pdf')
+uploaded_files = st.sidebar.file_uploader("",accept_multiple_files=True, type=['pdf'])
+
+if uploaded_files:
+    st.sidebar.write("You have uploaded the following files:")
+    for file in uploaded_files:
+        st.sidebar.write(file.name)
+        # Open the file as a stream
+        file_stream = BytesIO(file.read())
+        # Create a PDF file reader object
+        pdf_reader = PyPDF2.PdfFileReader(file_stream)
+        text = ""
+        # Loop over each page in the PDF and extract the text
+        for page in range(pdf_reader.getNumPages()):
+            text += pdf_reader.getPage(page).extract_text()
+        # Append the text to the data list
+        data.append(text)
+        # Append the filename to the filenames list
+        filenames.append(file.name)
+
+st.write(data)
+
+
 # # # # Split pages from pdf 
 # # pages = loader.load_and_split()
 # document = loader.load() # load sinlge page
