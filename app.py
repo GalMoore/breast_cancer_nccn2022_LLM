@@ -17,6 +17,7 @@ os.environ['OPENAI_API_KEY'] = st.secrets["openai_password"]
 # Create instance of OpenAI LLM
 llm = OpenAI(temperature=0.1, verbose=True)
 
+st.write("yo")
 # # Create and load PDF Loader
 # loader = PyPDFLoader("breast-invasive-patient.pdf")
 # # loader = PyPDFLoader('/content/drive//My Drive/3_MY_WORK/1_My_projects/3b_langchain_experiment/git_repo/LangchainDocuments/gal.pdf')
