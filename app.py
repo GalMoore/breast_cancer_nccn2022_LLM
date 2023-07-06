@@ -5,7 +5,7 @@ from langchain.document_loaders import PyPDFLoader # Import PDF document loaders
 from langchain.vectorstores import Chroma # Import chroma as the vector store 
 import PyPDF2
 from io import BytesIO
-
+import openai
 
 # Import vector store stuff
 from langchain.agents.agent_toolkits import (
