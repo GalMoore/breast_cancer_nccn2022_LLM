@@ -1,21 +1,13 @@
 import os
-#from langchain.llms import OpenAI # Import OpenAI as main LLM service
 import streamlit as st # Bring in streamlit for UI/app interface
-# from langchain.document_loaders import PyPDFLoader # Import PDF document loaders...there's other ones as well!
-#from langchain.vectorstores import Chroma # Import chroma as the vector store 
 import PyPDF2
 from io import BytesIO
 import openai
 import time
+import matplotlib.pyplot as plt
+import numpy as np
 
 openai.api_key = st.secrets["openai_password"]
-
-
-# st.write("yo")
-# Create and load PDF Loader
-# loader = PyPDFLoader("breast-invasive-patient.pdf")
-# # loader = PyPDFLoader('/content/drive//My Drive/3_MY_WORK/1_My_projects/3b_langchain_experiment/git_repo/LangchainDocuments/gal.pdf')
-
 
 ###############################################
 ##### I THINK THIS IS THE CHAT BAR #¢##########
@@ -67,7 +59,6 @@ if prompt := st.chat_input("What is up?"):
 ####################################################
 ####################################################
 
-
 uploaded_files = st.sidebar.file_uploader("",accept_multiple_files=True, type=['pdf'])
 # Initialize an empty list to store the extracted text from the uploaded files
 data = []
@@ -89,9 +80,6 @@ if uploaded_files:
         # Append the filename to the filenames list
         filenames.append(file.name)
         
-import matplotlib.pyplot as plt
-import numpy as np
-
 # Generate an array of random numbers
 random_numbers = np.random.rand(100)
 if data:
