@@ -9,29 +9,6 @@ import numpy as np
 
 openai.api_key = st.secrets["openai_password"]
 
-uploaded_files = st.sidebar.file_uploader("",accept_multiple_files=True, type=['pdf'])
-data = []
-filenames = []
-if uploaded_files:
-    st.sidebar.write("You have uploaded the following files:")
-    for file in uploaded_files:
-        st.sidebar.write(file.name)
-        file_stream = BytesIO(file.read())
-        pdf_reader = PyPDF2.PdfFileReader(file_stream)
-        text = ""
-        for page in range(pdf_reader.getNumPages()):
-            text += pdf_reader.getPage(page).extract_text()
-        data.append(text)
-        filenames.append(file.name)
-        
-random_numbers = np.random.rand(100)
-if data:
-    time.sleep(5)
-    st.write(data[0][:50])
-    random_numbers = np.random.rand(100)
-    plt.plot(random_numbers)
-    st.pyplot(plt)
-
 if "openai_model" not in st.session_state:
     st.session_state["openai_model"] =  "gpt-3.5-turbo-16k" 
 
@@ -60,67 +37,46 @@ if prompt := st.chat_input("What is up?"):
         message_placeholder.markdown(full_response)
     st.session_state.messages.append({"role": "assistant", "content": full_response})
 
-# import os
-# import streamlit as st 
-# import PyPDF2
-# from io import BytesIO
-# import openai
-# import time
-# import matplotlib.pyplot as plt
-# import numpy as np
-
-# openai.api_key = st.secrets["openai_password"]
-
-# if "openai_model" not in st.session_state:
-#     st.session_state["openai_model"] =  "gpt-3.5-turbo-16k" 
-
-# if "messages" not in st.session_state:
-#     st.session_state.messages = []
-
-# if prompt := st.chat_input("What is up?"):
-#     # If the user inputs a message, clear previous messages and append the new one with the role "user"
-#     st.session_state.messages = [{"role": "user", "content": prompt}]
-#     with st.chat_message("user"):
-#         st.markdown(prompt)
-
-#     with st.chat_message("assistant"):
-#         message_placeholder = st.empty()
-#         full_response = ""
-#         for response in openai.ChatCompletion.create(
-#             model=st.session_state["openai_model"],
-#             messages=[
-#                 {"role": m["role"], "content": m["content"]}
-#                 for m in st.session_state.messages
-#             ],
-#             stream=True,
-#         ):
-#             full_response += response.choices[0].delta.get("content", "")
-#             message_placeholder.markdown(full_response + "▌")
-#         message_placeholder.markdown(full_response)
-#     st.session_state.messages.append({"role": "assistant", "content": full_response})
-
-# uploaded_files = st.sidebar.file_uploader("",accept_multiple_files=True, type=['pdf'])
-# data = []
-# filenames = []
-# if uploaded_files:
-#     st.sidebar.write("You have uploaded the following files:")
-#     for file in uploaded_files:
-#         st.sidebar.write(file.name)
-#         file_stream = BytesIO(file.read())
-#         pdf_reader = PyPDF2.PdfFileReader(file_stream)
-#         text = ""
-#         for page in range(pdf_reader.getNumPages()):
-#             text += pdf_reader.getPage(page).extract_text()
-#         data.append(text)
-#         filenames.append(file.name)
+uploaded_files = st.sidebar.file_uploader("",accept_multiple_files=True, type=['pdf'])
+data = []
+filenames = []
+if uploaded_files:
+    st.sidebar.write("You have uploaded the following files:")
+    for file in uploaded_files:
+        st.sidebar.write(file.name)
+        file_stream = BytesIO(file.read())
+        pdf_reader = PyPDF2.PdfFileReader(file_stream)
+        text = ""
+        for page in range(pdf_reader.getNumPages()):
+            text += pdf_reader.getPage(page).extract_text()
+        data.append(text)
+        filenames.append(file.name)
         
-# random_numbers = np.random.rand(100)
-# if data:
-#     time.sleep(5)
-#     st.write(data[0][:50])
-#     random_numbers = np.random.rand(100)
-#     plt.plot(random_numbers)
-#     st.pyplot(plt)
+random_numbers = np.random.rand(100)
+if data:
+    time.sleep(5)
+    st.write(data[0][:50])
+    random_numbers = np.random.rand(100)
+    plt.plot(random_numbers)
+    st.pyplot(plt)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # import os
 # import streamlit as st # Bring in streamlit for UI/app interface
