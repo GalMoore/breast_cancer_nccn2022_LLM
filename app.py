@@ -46,7 +46,7 @@ if uploaded_files:
         filenames.append(file.name)
 
 if data:
-    st.write(data)
+    st.write(data[:50])
 
 # # # # Split pages from pdf 
 # # pages = loader.load_and_split()
