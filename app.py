@@ -6,6 +6,7 @@ import streamlit as st # Bring in streamlit for UI/app interface
 import PyPDF2
 from io import BytesIO
 import openai
+import time
 
 openai.api_key = st.secrets["openai_password"]
 
@@ -36,6 +37,7 @@ if uploaded_files:
         filenames.append(file.name)
 
 if data:
+    time.sleep(5)
     st.write(data[0][:50])
 
 
