@@ -1,8 +1,8 @@
 import os
-from langchain.llms import OpenAI # Import OpenAI as main LLM service
+#from langchain.llms import OpenAI # Import OpenAI as main LLM service
 import streamlit as st # Bring in streamlit for UI/app interface
 # from langchain.document_loaders import PyPDFLoader # Import PDF document loaders...there's other ones as well!
-from langchain.vectorstores import Chroma # Import chroma as the vector store 
+#from langchain.vectorstores import Chroma # Import chroma as the vector store 
 import PyPDF2
 from io import BytesIO
 import openai
