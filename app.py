@@ -7,20 +7,8 @@ import PyPDF2
 from io import BytesIO
 import openai
 
-# # Import vector store stuff
-# from langchain.agents.agent_toolkits import (
-#     create_vectorstore_agent,
-#     VectorStoreToolkit,
-#     VectorStoreInfo
-# )
-
-# # Set APIkey for OpenAI Service / Can sub this out for other LLM providers
-# os.environ['OPENAI_API_KEY'] = st.secrets["openai_password"]
-# Set the OpenAI API key from Streamlit secrets
 openai.api_key = st.secrets["openai_password"]
 
-# # Create instance of OpenAI LLM
-# llm = OpenAI(temperature=0.1, verbose=True)
 
 # st.write("yo")
 # Create and load PDF Loader
