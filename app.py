@@ -88,10 +88,19 @@ if uploaded_files:
         data.append(text)
         # Append the filename to the filenames list
         filenames.append(file.name)
+        
+import matplotlib.pyplot as plt
+import numpy as np
 
+# Generate an array of random numbers
+random_numbers = np.random.rand(100)
 if data:
     time.sleep(5)
     st.write(data[0][:50])
+    # Generate an array of random numbers
+    random_numbers = np.random.rand(100)
+    plt.plot(random_numbers)
+    st.pyplot(plt)
 
 
 
