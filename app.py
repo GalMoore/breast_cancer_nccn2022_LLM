@@ -15,39 +15,38 @@ if 'plots' not in st.session_state:
         st.session_state['plots'] = False
 
 
-
 # see the session state update live
 st.write(st.session_state)
 
-# openai.api_key = st.secrets["openai_password"]
+openai.api_key = st.secrets["openai_password"]
 
-# if "openai_model" not in st.session_state:
-#     st.session_state["openai_model"] =  "gpt-3.5-turbo-16k" 
+if "openai_model" not in st.session_state:
+    st.session_state["openai_model"] =  "gpt-3.5-turbo-16k" 
 
-# if "messages" not in st.session_state:
-#     st.session_state.messages = []
+if "messages" not in st.session_state:
+    st.session_state.messages = []
 
-# if prompt := st.chat_input("What is up?"):
-#     # If the user inputs a message, clear previous messages and append the new one with the role "user"
-#     st.session_state.messages = [{"role": "user", "content": prompt}]
-#     with st.chat_message("user"):
-#         st.markdown(prompt)
+if prompt := st.chat_input("What is up?"):
+    # If the user inputs a message, clear previous messages and append the new one with the role "user"
+    st.session_state.messages = [{"role": "user", "content": prompt}]
+    with st.chat_message("user"):
+        st.markdown(prompt)
 
-#     with st.chat_message("assistant"):
-#         message_placeholder = st.empty()
-#         full_response = ""
-#         for response in openai.ChatCompletion.create(
-#             model=st.session_state["openai_model"],
-#             messages=[
-#                 {"role": m["role"], "content": m["content"]}
-#                 for m in st.session_state.messages
-#             ],
-#             stream=True,
-#         ):
-#             full_response += response.choices[0].delta.get("content", "")
-#             message_placeholder.markdown(full_response + "▌")
-#         message_placeholder.markdown(full_response)
-#     st.session_state.messages.append({"role": "assistant", "content": full_response})
+    with st.chat_message("assistant"):
+        message_placeholder = st.empty()
+        full_response = ""
+        for response in openai.ChatCompletion.create(
+            model=st.session_state["openai_model"],
+            messages=[
+                {"role": m["role"], "content": m["content"]}
+                for m in st.session_state.messages
+            ],
+            stream=True,
+        ):
+            full_response += response.choices[0].delta.get("content", "")
+            message_placeholder.markdown(full_response + "▌")
+        message_placeholder.markdown(full_response)
+    st.session_state.messages.append({"role": "assistant", "content": full_response})
 
 # uploaded_files = st.sidebar.file_uploader("",accept_multiple_files=True, type=['pdf'])
 # data = []
