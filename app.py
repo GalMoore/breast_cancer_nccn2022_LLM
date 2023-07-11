@@ -24,7 +24,7 @@ increment = st.button("show more columns")
 if increment:
         random_numbers = np.random.rand(100)
         # if df.empty:
-        time.sleep(5)
+        # time.sleep(5)
         # st.write(data[0][:50])
         random_numbers = np.random.rand(100)
         plt.plot(random_numbers)
