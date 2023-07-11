@@ -24,6 +24,7 @@ if increment:
         st.session_state.number_of_rows += 1
 
 decrement = st.button("Show fewer columns")
+st.write(decrement)
 if decrement:
         st.session_state.number_of_rows -=1
 
