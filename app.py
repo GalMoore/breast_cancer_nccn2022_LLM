@@ -27,7 +27,7 @@ if decrement:
 
 st.table(df.head(st.session_state['number_of_rows']))
 
-
+# see the session state update live
 st.write(st.session_state)
 
 # openai.api_key = st.secrets["openai_password"]
