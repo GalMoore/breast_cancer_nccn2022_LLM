@@ -14,10 +14,6 @@ st.title("Let's explores session states and callback functions")
 if 'plots' not in st.session_state:
         st.session_state['plots'] = False
 
-
-# see the session state update live
-st.write(st.session_state)
-
 openai.api_key = st.secrets["openai_password"]
 
 if "openai_model" not in st.session_state:
@@ -48,20 +44,24 @@ if prompt := st.chat_input("What is up?"):
         message_placeholder.markdown(full_response)
     st.session_state.messages.append({"role": "assistant", "content": full_response})
 
-uploaded_files = st.sidebar.file_uploader("",accept_multiple_files=True, type=['pdf'])
-data = []
-filenames = []
-if uploaded_files:
-    st.sidebar.write("You have uploaded the following files:")
-    for file in uploaded_files:
-        st.sidebar.write(file.name)
-        file_stream = BytesIO(file.read())
-        pdf_reader = PyPDF2.PdfFileReader(file_stream)
-        text = ""
-        for page in range(pdf_reader.getNumPages()):
-            text += pdf_reader.getPage(page).extract_text()
-        data.append(text)
-        filenames.append(file.name)
+print(prompt)
+# see the session state update live
+st.write(st.session_state)
+
+# uploaded_files = st.sidebar.file_uploader("",accept_multiple_files=True, type=['pdf'])
+# data = []
+# filenames = []
+# if uploaded_files:
+#     st.sidebar.write("You have uploaded the following files:")
+#     for file in uploaded_files:
+#         st.sidebar.write(file.name)
+#         file_stream = BytesIO(file.read())
+#         pdf_reader = PyPDF2.PdfFileReader(file_stream)
+#         text = ""
+#         for page in range(pdf_reader.getNumPages()):
+#             text += pdf_reader.getPage(page).extract_text()
+#         data.append(text)
+#         filenames.append(file.name)
         
 # random_numbers = np.random.rand(100)
 # if data:
