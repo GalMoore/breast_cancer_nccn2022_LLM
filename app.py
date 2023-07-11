@@ -27,9 +27,14 @@ if uploaded_files:
 
         time.sleep(5)
         st.write(data[0][:50])
-        random_numbers = np.random.rand(100)
-        plt.plot(random_numbers)
-        st.pyplot(plt)
+
+        # Update the random_numbers in the session state only when new files are uploaded
+        st.session_state.random_numbers = np.random.rand(100)
+        # random_numbers = np.random.rand(100)
+# If the random_numbers are available in the session state, plot them
+if "random_numbers" in st.session_state:
+    plt.plot(st.session_state.random_numbers)
+    st.pyplot(plt)
 
 openai.api_key = st.secrets["openai_password"]
 
