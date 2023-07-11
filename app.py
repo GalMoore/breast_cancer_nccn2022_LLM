@@ -13,7 +13,7 @@ df = pd.DataFrame(data, columns=['A', 'B', 'C', 'D'])
 increment = st.button("show more columns")
 if increment:
         random_numbers = np.random.rand(100)
-        if df:
+        if df.empty:
             time.sleep(5)
             # st.write(data[0][:50])
             random_numbers = np.random.rand(100)
