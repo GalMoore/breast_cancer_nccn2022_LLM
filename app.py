@@ -26,7 +26,7 @@ if uploaded_files:
                 filenames.append(file.name)
 
         time.sleep(5)
-        st.write(st.session_state['my_data'][0][:50])
+        st.write(data[0][:50])
         random_numbers = np.random.rand(100)
         plt.plot(random_numbers)
         st.pyplot(plt)
