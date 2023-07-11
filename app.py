@@ -26,10 +26,10 @@ st.write("uploaded_files",uploaded_files)
 # st.write(uploaded_files)
 
 if uploaded_files and st.session_state['the_data_has_been_plotted'] == False:
-            data = []
-            filenames = []
-            st.sidebar.write("You have uploaded the following files:")
-            for file in uploaded_files:
+        data = []
+        filenames = []
+        st.sidebar.write("You have uploaded the following files:")
+        for file in uploaded_files:
                 st.sidebar.write(file.name)
                 file_stream = BytesIO(file.read())
                 pdf_reader = PyPDF2.PdfFileReader(file_stream)
