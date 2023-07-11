@@ -14,7 +14,7 @@ st.title("Let's explores session states and callback functions")
 
 ###### file loading and graphs        
 # create session_state variable (onyl create if doesn't exist)
-if 'latest_data' not in st.session_state:
+if 'plotted_data' not in st.session_state:
         st.session_state['plotted_data'] = []
         
 uploaded_files = st.sidebar.file_uploader("",accept_multiple_files=True, type=['pdf'])
