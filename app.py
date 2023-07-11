@@ -21,6 +21,7 @@ else:
         st.write("gal is king 1")
         
 uploaded_files = st.sidebar.file_uploader("",accept_multiple_files=True, type=['pdf'])
+st.write(uploaded_files)
 data = []
 filenames = []
 if uploaded_files:
