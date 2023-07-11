@@ -8,10 +8,10 @@ from io import BytesIO
 import openai
 import time
 
-from pandasai.llm.openai import OpenAI
-from dotenv import load_dotenv
+# from pandasai.llm.openai import OpenAI
+# from dotenv import load_dotenv
 import os
-from pandasai import PandasAI
+# from pandasai import PandasAI
 
 # load_dotenv()
 
@@ -19,13 +19,12 @@ from pandasai import PandasAI
 openai_api_key = os.getenv("OPENAI_API_KEY")
 # openai.api_key = st.secrets["openai_password"]
 
-
-def chat_with_csv(df,prompt):
-    llm = OpenAI(api_token=openai_api_key)
-    pandas_ai = PandasAI(llm)
-    result = pandas_ai.run(df, prompt=prompt)
-    print(result)
-    return result
+# def chat_with_csv(df,prompt):
+#     llm = OpenAI(api_token=openai_api_key)
+#     pandas_ai = PandasAI(llm)
+#     result = pandas_ai.run(df, prompt=prompt)
+#     print(result)
+#     return result
 
 st.set_page_config(layout='wide')
 
