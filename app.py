@@ -11,7 +11,7 @@ import os
 
 
 st.title("Let's explores session states and callback functions")
-
+st.write("data ", data) 
 ##### file loading and graphs        
 # create session_state variable (onyl create if doesn't exist)
 if 'the_data_has_been_plotted' not in st.session_state:
