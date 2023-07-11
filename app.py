@@ -3,7 +3,11 @@ import pandas as pd
 
 st.title("Let's explores session states and callback functions")
 
+# Create a 4x4 numpy array with random numbers
+data = np.random.rand(4, 4)
 
+# Create a pandas DataFrame
+df = pd.DataFrame(data, columns=['A', 'B', 'C', 'D'])
 
 
 
