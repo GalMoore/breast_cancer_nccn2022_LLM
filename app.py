@@ -7,17 +7,14 @@ import PyPDF2
 from io import BytesIO
 import openai
 import time
-
 # from pandasai.llm.openai import OpenAI
 # from dotenv import load_dotenv
 import os
 # from pandasai import PandasAI
-
 # load_dotenv()
 
-
-openai_api_key = os.getenv("OPENAI_API_KEY")
-# openai.api_key = st.secrets["openai_password"]
+# openai_api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key = st.secrets["openai_password"]
 
 # def chat_with_csv(df,prompt):
 #     llm = OpenAI(api_token=openai_api_key)
@@ -33,7 +30,6 @@ st.title("ChatCSV powered by LLM")
 input_csv = st.file_uploader("Upload your CSV file", type=['csv'])
 
 if input_csv is not None:
-
         col1, col2 = st.columns([1,1])
 
         with col1:
@@ -42,8 +38,7 @@ if input_csv is not None:
             st.dataframe(data, use_container_width=True)
 
         with col2:
-
-            st.info("Chat Below")
+                st.info("Chat Below")
             
             # input_text = st.text_area("Enter your query")
 
@@ -53,7 +48,33 @@ if input_csv is not None:
             #         result = chat_with_csv(data, input_text)
             #         st.success(result)
 
-
+                if "openai_model" not in st.session_state:
+                    st.session_state["openai_model"] =  "gpt-3.5-turbo-16k" 
+                if "messages" not in st.session_state:
+                    st.session_state.messages = []
+                    
+                # prompt is the latest text input into the chat bar
+                if prompt := st.chat_input("What is up?"):
+                    # If the user inputs a message, clear previous messages and append the new one with the role "user"
+                    st.session_state.messages = [{"role": "user", "content": prompt}]
+                    with st.chat_message("user"):
+                        st.markdown(prompt)
+                
+                    with st.chat_message("assistant"):
+                        message_placeholder = st.empty()
+                        full_response = ""
+                        for response in openai.ChatCompletion.create(
+                            model=st.session_state["openai_model"],
+                            messages=[
+                                {"role": m["role"], "content": m["content"]}
+                                for m in st.session_state.messages
+                            ],
+                            stream=True,
+                        ):
+                            full_response += response.choices[0].delta.get("content", "")
+                            message_placeholder.markdown(full_response + "▌")
+                        message_placeholder.markdown(full_response)
+                    st.session_state.messages.append({"role": "assistant", "content": full_response})
 
 
 
