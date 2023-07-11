@@ -71,8 +71,8 @@ if uploaded_files:
 # st.session_state["latest_data"] = data
 
 if data:
-        if st.session_state["latest_data"]!=data
-        st.session_state['display_plot'] = True
+        if st.session_state["latest_data"]!=data:
+            st.session_state['display_plot'] = True
         
 if st.session_state['display_plot']:
         time.sleep(5)
