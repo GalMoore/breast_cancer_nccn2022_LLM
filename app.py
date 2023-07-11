@@ -10,6 +10,7 @@ data = np.random.rand(4, 4)
 # Create a pandas DataFrame
 df = pd.DataFrame(data, columns=['A', 'B', 'C', 'D'])
 
+increment = st.button("show more columns")
 
 
 # import os
