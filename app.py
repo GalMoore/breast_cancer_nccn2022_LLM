@@ -22,6 +22,7 @@ if "openai_model" not in st.session_state:
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
+# prompt is the latest text input into the chat bar
 if prompt := st.chat_input("What is up?"):
     # If the user inputs a message, clear previous messages and append the new one with the role "user"
     st.session_state.messages = [{"role": "user", "content": prompt}]
@@ -44,7 +45,7 @@ if prompt := st.chat_input("What is up?"):
         message_placeholder.markdown(full_response)
     st.session_state.messages.append({"role": "assistant", "content": full_response})
 
-st.write(prompt)
+# st.write(prompt)
 # see the session state update live
 # st.write(st.session_state)
 
