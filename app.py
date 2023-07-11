@@ -42,9 +42,10 @@ if uploaded_files and st.session_state['the_data_has_been_plotted'] == False:
         st.write(data[0][:50])
         random_numbers = np.random.rand(100)
         plt.plot(random_numbers)
-        st.pyplot(plt)
         # data has been plot
         st.session_state['the_data_has_been_plotted'] = True
+
+st.pyplot(plt)
 
 
 # st.write(st.session_state)
