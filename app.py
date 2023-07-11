@@ -19,7 +19,7 @@ df = pd.DataFrame(data, columns=['A', 'B', 'C', 'D'])
 
 # if this button click is the last thing that happened:
 # it becomes true so increase variable that will change df.head() below
-# after a minute, the st.button bool turns back to false 
+# after a few minutes, the st.button bool turns back to false 
 increment = st.button("show more columns")
 st.write(increment)
 if increment:
@@ -27,7 +27,7 @@ if increment:
 
 # if this button click is the last thing that happened:
 # it becomes true so decrement variable that will change df.head() below
-# after a minute, the st.button bool turns back to false 
+# after a few minutes, the st.button bool turns back to false 
 decrement = st.button("Show fewer columns")
 st.write(decrement)
 if decrement:
