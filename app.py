@@ -9,10 +9,21 @@ import openai
 import time
 import os
 
+if 'my_fave_number' in st.session_state:
+    st.write(st.session_state['my_fave_number'])
+else:
+    st.write("The variable 'my_fave_number' does not exist in session_state.")
+        
+if 'my_fave_number' not in st.session_state:
+        st.session_state['my_fave_number'] = 0
+else:
+        st.write(")
 
+
+st.session_state['my_fave_number'] = 2
+        
 st.title("Let's explores session states and callback functions")
-if data in locals():
-        st.write("data ", data) 
+        
 ##### file loading and graphs        
 # create session_state variable (onyl create if doesn't exist)
 if 'the_data_has_been_plotted' not in st.session_state:
