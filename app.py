@@ -11,7 +11,7 @@ import os
 
 
 st.title("Let's explores session states and callback functions")
-if data.exists:
+if data in globals():
         st.write("data ", data) 
 ##### file loading and graphs        
 # create session_state variable (onyl create if doesn't exist)
