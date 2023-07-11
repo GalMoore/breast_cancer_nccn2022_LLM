@@ -11,7 +11,14 @@ data = np.random.rand(4, 4)
 df = pd.DataFrame(data, columns=['A', 'B', 'C', 'D'])
 
 increment = st.button("show more columns")
-
+if increment:
+        random_numbers = np.random.rand(100)
+        if df:
+            time.sleep(5)
+            # st.write(data[0][:50])
+            random_numbers = np.random.rand(100)
+            plt.plot(random_numbers)
+            st.pyplot(plt)
 
 # import os
 # import streamlit as st 
