@@ -16,6 +16,9 @@ st.title("Let's explores session states and callback functions")
 # create session_state variable (onyl create if doesn't exist)
 if 'plotted_data' not in st.session_state:
         st.session_state['plotted_data'] = []
+        st.write("shira is queen")
+else:
+        st.write("gal is king 1")
         
 uploaded_files = st.sidebar.file_uploader("",accept_multiple_files=True, type=['pdf'])
 data = []
