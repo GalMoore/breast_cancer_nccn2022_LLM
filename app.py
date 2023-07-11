@@ -13,7 +13,7 @@ import os
 st.title("Let's explores session states and callback functions")
 
 ##### file loading and graphs        
-create session_state variable (onyl create if doesn't exist)
+# create session_state variable (onyl create if doesn't exist)
 if 'plotted_data' not in st.session_state:
         st.session_state['plotted_data'] = []
         st.write("shira is queen")
