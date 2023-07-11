@@ -14,7 +14,7 @@ st.title("Let's explores session states and callback functions")
 if 'number_of_rows' not in st.session_state:
         st.session_state['number_of_rows'] = 5
         
-data = np.random.rand(4, 4)
+data = np.random.rand(10, 4)
 df = pd.DataFrame(data, columns=['A', 'B', 'C', 'D'])
 
 increment = st.button("show more columns")
