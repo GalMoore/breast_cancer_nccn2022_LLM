@@ -12,13 +12,13 @@ import os
 
 st.title("Let's explores session states and callback functions")
 
-###### file loading and graphs        
-# create session_state variable (onyl create if doesn't exist)
-# if 'plotted_data' not in st.session_state:
-#         st.session_state['plotted_data'] = []
-#         st.write("shira is queen")
-# else:
-#         st.write("gal is king 1")
+##### file loading and graphs        
+create session_state variable (onyl create if doesn't exist)
+if 'plotted_data' not in st.session_state:
+        st.session_state['plotted_data'] = []
+        st.write("shira is queen")
+else:
+        st.write("gal is king 1")
         
 uploaded_files = st.sidebar.file_uploader("",accept_multiple_files=True, type=['pdf'])
 st.write(uploaded_files)
@@ -36,7 +36,10 @@ if uploaded_files:
         data.append(text)
         filenames.append(file.name)
 
-# if st.session_state['plotted_data'] != data:
+st.write(st.session_state['plotted_data'] == data)
+
+if st.session_state['plotted_data'] != data:
+        
         time.sleep(5)
         st.write(data[0][:50])
         random_numbers = np.random.rand(100)
@@ -45,6 +48,7 @@ if uploaded_files:
 
         # data that has been plot
         st.session_state['plotted_data'] = data
+
 
 # st.write(st.session_state)
 
