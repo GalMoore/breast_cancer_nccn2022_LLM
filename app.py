@@ -10,7 +10,7 @@ import time
 
 st.title("Let's explores session states and callback functions")
 
-# create session_state variable
+# create session_state variable (onyl create if doesn't exist)
 if 'number_of_rows' not in st.session_state:
         st.session_state['number_of_rows'] = 5
         
