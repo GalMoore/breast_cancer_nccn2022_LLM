@@ -14,10 +14,9 @@ openai.api_key = st.secrets["openai_password"]
 
 if "openai_model" not in st.session_state:
     st.session_state["openai_model"] =  "gpt-3.5-turbo-16k" 
-
 if "messages" not in st.session_state:
     st.session_state.messages = []
-
+    
 # prompt is the latest text input into the chat bar
 if prompt := st.chat_input("What is up?"):
     # If the user inputs a message, clear previous messages and append the new one with the role "user"
@@ -42,15 +41,17 @@ if prompt := st.chat_input("What is up?"):
     st.session_state.messages.append({"role": "assistant", "content": full_response})
 
 
+
+
 ###### file loading and graphs
 
-# create session_state variable (onyl create if doesn't exist)
-if 'display_plot' not in st.session_state:
-        st.session_state['display_plot'] = False
+# # create session_state variable (onyl create if doesn't exist)
+# if 'display_plot' not in st.session_state:
+#         st.session_state['display_plot'] = False
         
-# create session_state variable (onyl create if doesn't exist)
-if 'latest_data' not in st.session_state:
-        st.session_state['latest_data'] = []
+# # create session_state variable (onyl create if doesn't exist)
+# if 'latest_data' not in st.session_state:
+#         st.session_state['latest_data'] = []
         
 uploaded_files = st.sidebar.file_uploader("",accept_multiple_files=True, type=['pdf'])
 data = []
@@ -67,12 +68,6 @@ if uploaded_files:
         data.append(text)
         filenames.append(file.name)
 
-# # this is the latest data loaded
-# st.session_state["latest_data"] = data
-
-if data:
-        if st.session_state["latest_data"]!=data:
-            st.session_state['display_plot'] = True
         
 if st.session_state['display_plot']:
         time.sleep(5)
@@ -80,8 +75,6 @@ if st.session_state['display_plot']:
         random_numbers = np.random.rand(100)
         plt.plot(random_numbers)
         st.pyplot(plt)
-        st.session_state['display_plot'] = False
-
 
 
 st.write(st.session_state)
