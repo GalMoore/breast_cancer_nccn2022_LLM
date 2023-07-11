@@ -22,6 +22,7 @@ else:
 
 
 uploaded_files = st.sidebar.file_uploader("",accept_multiple_files=True, type=['pdf'])
+st.write("uploaded_files",uploaded_files)
 st.write(uploaded_files)
 data = []
 filenames = []
