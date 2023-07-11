@@ -17,12 +17,15 @@ if 'number_of_rows' not in st.session_state:
 data = np.random.rand(10, 4)
 df = pd.DataFrame(data, columns=['A', 'B', 'C', 'D'])
 
-# if this button is clicked it becomes true so increase variable that will change df.head() below
+# if this button click is the last thing that happened:
+# it becomes true so increase variable that will change df.head() below
 increment = st.button("show more columns")
 st.write(increment)
 if increment:
         st.session_state.number_of_rows += 1
 
+# if this button click is the last thing that happened:
+# it becomes true so decrement variable that will change df.head() below
 decrement = st.button("Show fewer columns")
 st.write(decrement)
 if decrement:
