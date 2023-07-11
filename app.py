@@ -67,8 +67,8 @@ if uploaded_files:
         data.append(text)
         filenames.append(file.name)
 
-# this is the latest data loaded
-st.session_state["latest_data"] = data
+# # this is the latest data loaded
+# st.session_state["latest_data"] = data
 
 if data:
         if st.session_state["latest_data"]!=data
