@@ -10,10 +10,6 @@ import time
 
 st.title("Let's explores session states and callback functions")
 
-# create session_state variable (onyl create if doesn't exist)
-if 'plots' not in st.session_state:
-        st.session_state['plots'] = False
-
 openai.api_key = st.secrets["openai_password"]
 
 if "openai_model" not in st.session_state:
@@ -45,10 +41,17 @@ if prompt := st.chat_input("What is up?"):
         message_placeholder.markdown(full_response)
     st.session_state.messages.append({"role": "assistant", "content": full_response})
 
-# st.write(prompt)
-# see the session state update live
-# st.write(st.session_state)
 
+###### file loading and graphs
+
+# create session_state variable (onyl create if doesn't exist)
+if 'display_plot' not in st.session_state:
+        st.session_state['display_plot'] = False
+        
+# create session_state variable (onyl create if doesn't exist)
+if 'latest_data' not in st.session_state:
+        st.session_state['latest_data'] = []
+        
 uploaded_files = st.sidebar.file_uploader("",accept_multiple_files=True, type=['pdf'])
 data = []
 filenames = []
@@ -63,16 +66,25 @@ if uploaded_files:
             text += pdf_reader.getPage(page).extract_text()
         data.append(text)
         filenames.append(file.name)
-        
-random_numbers = np.random.rand(100)
+
+# this is the latest data loaded
+st.session_state["latest_data"] = data
+
 if data:
-    time.sleep(5)
-    st.write(data[0][:50])
-    random_numbers = np.random.rand(100)
-    plt.plot(random_numbers)
-    st.pyplot(plt)
+        if st.session_state["latest_data"]!=data
+        st.session_state['display_plot'] = True
+        
+if st.session_state['display_plot']:
+        time.sleep(5)
+        st.write(data[0][:50])
+        random_numbers = np.random.rand(100)
+        plt.plot(random_numbers)
+        st.pyplot(plt)
+        st.session_state['display_plot'] = False
 
 
+
+st.write(st.session_state)
 
 
 
