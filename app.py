@@ -49,9 +49,9 @@ if prompt := st.chat_input("What is up?"):
 # if 'display_plot' not in st.session_state:
 #         st.session_state['display_plot'] = False
         
-# # create session_state variable (onyl create if doesn't exist)
-# if 'latest_data' not in st.session_state:
-#         st.session_state['latest_data'] = []
+# create session_state variable (onyl create if doesn't exist)
+if 'latest_data' not in st.session_state:
+        st.session_state['plotted_data'] = []
         
 uploaded_files = st.sidebar.file_uploader("",accept_multiple_files=True, type=['pdf'])
 data = []
@@ -68,14 +68,17 @@ if uploaded_files:
         data.append(text)
         filenames.append(file.name)
 
-        
-if st.session_state['display_plot']:
+
+
+if st.session_state['plotted_data'] != data:
         time.sleep(5)
         st.write(data[0][:50])
         random_numbers = np.random.rand(100)
         plt.plot(random_numbers)
         st.pyplot(plt)
 
+        # data that has been plot
+        st.session_state['plotted_data'] = data
 
 st.write(st.session_state)
 
