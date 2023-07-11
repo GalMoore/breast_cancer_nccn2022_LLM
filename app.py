@@ -7,6 +7,7 @@ import PyPDF2
 from io import BytesIO
 import openai
 import time
+import bokeh 
 
 st.title("Let's explores session states and callback functions")
 
