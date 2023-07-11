@@ -19,7 +19,7 @@ if increment:
         # st.write(data[0][:50])
         random_numbers = np.random.rand(100)
         plt.plot(random_numbers)
-st.pyplot(plt)
+        st.pyplot(plt)
 
 # import os
 # import streamlit as st 
