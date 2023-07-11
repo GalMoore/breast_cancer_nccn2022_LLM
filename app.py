@@ -49,20 +49,20 @@ if prompt := st.chat_input("What is up?"):
 # see the session state update live
 # st.write(st.session_state)
 
-# uploaded_files = st.sidebar.file_uploader("",accept_multiple_files=True, type=['pdf'])
-# data = []
-# filenames = []
-# if uploaded_files:
-#     st.sidebar.write("You have uploaded the following files:")
-#     for file in uploaded_files:
-#         st.sidebar.write(file.name)
-#         file_stream = BytesIO(file.read())
-#         pdf_reader = PyPDF2.PdfFileReader(file_stream)
-#         text = ""
-#         for page in range(pdf_reader.getNumPages()):
-#             text += pdf_reader.getPage(page).extract_text()
-#         data.append(text)
-#         filenames.append(file.name)
+uploaded_files = st.sidebar.file_uploader("",accept_multiple_files=True, type=['pdf'])
+data = []
+filenames = []
+if uploaded_files:
+    st.sidebar.write("You have uploaded the following files:")
+    for file in uploaded_files:
+        st.sidebar.write(file.name)
+        file_stream = BytesIO(file.read())
+        pdf_reader = PyPDF2.PdfFileReader(file_stream)
+        text = ""
+        for page in range(pdf_reader.getNumPages()):
+            text += pdf_reader.getPage(page).extract_text()
+        data.append(text)
+        filenames.append(file.name)
         
 # random_numbers = np.random.rand(100)
 # if data:
