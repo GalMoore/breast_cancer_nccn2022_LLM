@@ -24,7 +24,7 @@ decrement = st.button("Show fewer columns")
 if decrement:
         st.session_state.number_of_rows -=1
 
-st.table(df.head(st.sesssion_state['number_of_rows']))
+st.table(df.head(st.session_state['number_of_rows']))
 
 
 
