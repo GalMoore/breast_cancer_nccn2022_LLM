@@ -7,189 +7,135 @@ import PyPDF2
 from io import BytesIO
 import openai
 import time
-# from pandasai.llm.openai import OpenAI
-# from dotenv import load_dotenv
 import os
-# from pandasai import PandasAI
-# load_dotenv()
 
-# openai_api_key = os.getenv("OPENAI_API_KEY")
+
+st.title("Let's explores session states and callback functions")
+
+###### file loading and graphs        
+# create session_state variable (onyl create if doesn't exist)
+if 'latest_data' not in st.session_state:
+        st.session_state['plotted_data'] = []
+        
+uploaded_files = st.sidebar.file_uploader("",accept_multiple_files=True, type=['pdf'])
+data = []
+filenames = []
+if uploaded_files:
+    st.sidebar.write("You have uploaded the following files:")
+    for file in uploaded_files:
+        st.sidebar.write(file.name)
+        file_stream = BytesIO(file.read())
+        pdf_reader = PyPDF2.PdfFileReader(file_stream)
+        text = ""
+        for page in range(pdf_reader.getNumPages()):
+            text += pdf_reader.getPage(page).extract_text()
+        data.append(text)
+        filenames.append(file.name)
+
+if st.session_state['plotted_data'] != data:
+        time.sleep(5)
+        st.write(data[0][:50])
+        random_numbers = np.random.rand(100)
+        plt.plot(random_numbers)
+        st.pyplot(plt)
+
+        # data that has been plot
+        st.session_state['plotted_data'] = data
+
+st.write(st.session_state)
+
+
 openai.api_key = st.secrets["openai_password"]
 
-# def chat_with_csv(df,prompt):
-#     llm = OpenAI(api_token=openai_api_key)
-#     pandas_ai = PandasAI(llm)
-#     result = pandas_ai.run(df, prompt=prompt)
-#     print(result)
-#     return result
-
-st.set_page_config(layout='wide')
-
-st.title("ChatCSV powered by LLM")
-
-input_csv = st.file_uploader("Upload your CSV file", type=['csv'])
-
-if input_csv is not None:
-        col1, col2 = st.columns([1,1])
-
-        with col1:
-            st.info("CSV Uploaded Successfully")
-            data = pd.read_csv(input_csv)
-            st.dataframe(data, use_container_width=True)
-
-        with col2:
-                st.info("Chat Below")
-            
-            # input_text = st.text_area("Enter your query")
-
-            # if input_text is not None:
-            #     if st.button("Chat with CSV"):
-            #         st.info("Your Query: "+input_text)
-            #         result = chat_with_csv(data, input_text)
-            #         st.success(result)
-
-                if "openai_model" not in st.session_state:
-                    st.session_state["openai_model"] =  "gpt-3.5-turbo-16k" 
-                if "messages" not in st.session_state:
-                    st.session_state.messages = []
-                    
-                # prompt is the latest text input into the chat bar
-                if prompt := st.chat_input("What is up?"):
-                    # If the user inputs a message, clear previous messages and append the new one with the role "user"
-                    st.session_state.messages = [{"role": "user", "content": prompt}]
-                    with st.chat_message("user"):
-                        st.markdown(prompt)
-                
-                    with st.chat_message("assistant"):
-                        message_placeholder = st.empty()
-                        full_response = ""
-                        for response in openai.ChatCompletion.create(
-                            model=st.session_state["openai_model"],
-                            messages=[
-                                {"role": m["role"], "content": m["content"]}
-                                for m in st.session_state.messages
-                            ],
-                            stream=True,
-                        ):
-                            full_response += response.choices[0].delta.get("content", "")
-                            message_placeholder.markdown(full_response + "▌")
-                        message_placeholder.markdown(full_response)
-                    st.session_state.messages.append({"role": "assistant", "content": full_response})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-####### LATEST 11/7/23 
-# st.title("Let's explores session states and callback functions")
-
-# ###### file loading and graphs
-
-# # # create session_state variable (onyl create if doesn't exist)
-# # if 'display_plot' not in st.session_state:
-# #         st.session_state['display_plot'] = False
-        
-# # create session_state variable (onyl create if doesn't exist)
-# if 'latest_data' not in st.session_state:
-#         st.session_state['plotted_data'] = []
-        
-# uploaded_files = st.sidebar.file_uploader("",accept_multiple_files=True, type=['pdf'])
-# data = []
-# filenames = []
-# if uploaded_files:
-#     st.sidebar.write("You have uploaded the following files:")
-#     for file in uploaded_files:
-#         st.sidebar.write(file.name)
-#         file_stream = BytesIO(file.read())
-#         pdf_reader = PyPDF2.PdfFileReader(file_stream)
-#         text = ""
-#         for page in range(pdf_reader.getNumPages()):
-#             text += pdf_reader.getPage(page).extract_text()
-#         data.append(text)
-#         filenames.append(file.name)
-
-
-
-# if st.session_state['plotted_data'] != data:
-#         time.sleep(5)
-#         st.write(data[0][:50])
-#         random_numbers = np.random.rand(100)
-#         plt.plot(random_numbers)
-#         st.pyplot(plt)
-
-#         # data that has been plot
-#         st.session_state['plotted_data'] = data
-
-# st.write(st.session_state)
-
-
-
-# openai.api_key = st.secrets["openai_password"]
-
-# if "openai_model" not in st.session_state:
-#     st.session_state["openai_model"] =  "gpt-3.5-turbo-16k" 
-# if "messages" not in st.session_state:
-#     st.session_state.messages = []
+if "openai_model" not in st.session_state:
+    st.session_state["openai_model"] =  "gpt-3.5-turbo-16k" 
+if "messages" not in st.session_state:
+    st.session_state.messages = []
     
-# # prompt is the latest text input into the chat bar
-# if prompt := st.chat_input("What is up?"):
-#     # If the user inputs a message, clear previous messages and append the new one with the role "user"
-#     st.session_state.messages = [{"role": "user", "content": prompt}]
-#     with st.chat_message("user"):
-#         st.markdown(prompt)
+# prompt is the latest text input into the chat bar
+if prompt := st.chat_input("What is up?"):
+    # If the user inputs a message, clear previous messages and append the new one with the role "user"
+    st.session_state.messages = [{"role": "user", "content": prompt}]
+    with st.chat_message("user"):
+        st.markdown(prompt)
 
-#     with st.chat_message("assistant"):
-#         message_placeholder = st.empty()
-#         full_response = ""
-#         for response in openai.ChatCompletion.create(
-#             model=st.session_state["openai_model"],
-#             messages=[
-#                 {"role": m["role"], "content": m["content"]}
-#                 for m in st.session_state.messages
-#             ],
-#             stream=True,
-#         ):
-#             full_response += response.choices[0].delta.get("content", "")
-#             message_placeholder.markdown(full_response + "▌")
-#         message_placeholder.markdown(full_response)
-#     st.session_state.messages.append({"role": "assistant", "content": full_response})
-####### LATEST 11/7/23  END #######
-
+    with st.chat_message("assistant"):
+        message_placeholder = st.empty()
+        full_response = ""
+        for response in openai.ChatCompletion.create(
+            model=st.session_state["openai_model"],
+            messages=[
+                {"role": m["role"], "content": m["content"]}
+                for m in st.session_state.messages
+            ],
+            stream=True,
+        ):
+            full_response += response.choices[0].delta.get("content", "")
+            message_placeholder.markdown(full_response + "▌")
+        message_placeholder.markdown(full_response)
+    st.session_state.messages.append({"role": "assistant", "content": full_response})
 
 
 
 
 
+
+
+
+
+
+# st.set_page_config(layout='wide')
+
+# st.title("ChatCSV powered by LLM")
+
+# input_csv = st.file_uploader("Upload your CSV file", type=['csv'])
+
+# if input_csv is not None:
+#         col1, col2 = st.columns([1,1])
+
+#         with col1:
+#             st.info("CSV Uploaded Successfully")
+#             data = pd.read_csv(input_csv)
+#             st.dataframe(data, use_container_width=True)
+
+#         with col2:
+#                 st.info("Chat Below")
+            
+#             # input_text = st.text_area("Enter your query")
+
+#             # if input_text is not None:
+#             #     if st.button("Chat with CSV"):
+#             #         st.info("Your Query: "+input_text)
+#             #         result = chat_with_csv(data, input_text)
+#             #         st.success(result)
+
+#                 if "openai_model" not in st.session_state:
+#                     st.session_state["openai_model"] =  "gpt-3.5-turbo-16k" 
+#                 if "messages" not in st.session_state:
+#                     st.session_state.messages = []
+                    
+#                 # prompt is the latest text input into the chat bar
+#                 if prompt := st.chat_input("What is up?"):
+#                     # If the user inputs a message, clear previous messages and append the new one with the role "user"
+#                     st.session_state.messages = [{"role": "user", "content": prompt}]
+#                     with st.chat_message("user"):
+#                         st.markdown(prompt)
+                
+#                     with st.chat_message("assistant"):
+#                         message_placeholder = st.empty()
+#                         full_response = ""
+#                         for response in openai.ChatCompletion.create(
+#                             model=st.session_state["openai_model"],
+#                             messages=[
+#                                 {"role": m["role"], "content": m["content"]}
+#                                 for m in st.session_state.messages
+#                             ],
+#                             stream=True,
+#                         ):
+#                             full_response += response.choices[0].delta.get("content", "")
+#                             message_placeholder.markdown(full_response + "▌")
+#                         message_placeholder.markdown(full_response)
+#                     st.session_state.messages.append({"role": "assistant", "content": full_response})
 
 
 
