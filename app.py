@@ -16,8 +16,9 @@ else:
         
 if 'my_fave_number' not in st.session_state:
         st.session_state['my_fave_number'] = 0
+        st.write("created my faev number")
 else:
-        st.write(")
+        st.write("couldnt create! ")
 
 
 st.session_state['my_fave_number'] = 2
