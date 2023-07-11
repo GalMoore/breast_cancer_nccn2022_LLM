@@ -41,11 +41,10 @@ if uploaded_files:
         st.write(data[0][:50])
         random_numbers = np.random.rand(100)
         plt.plot(random_numbers)
-
+        st.pyplot(plt)
         # data that has been plot
         st.session_state['plotted_data'] = data
 
-st.pyplot(plt)
 
 # st.write(st.session_state)
 
