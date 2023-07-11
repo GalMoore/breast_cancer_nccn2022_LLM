@@ -7,7 +7,6 @@ import PyPDF2
 from io import BytesIO
 import openai
 import time
-import bokeh 
 
 st.title("Let's explores session states and callback functions")
 
@@ -71,8 +70,7 @@ if data:
     st.write(data[0][:50])
     random_numbers = np.random.rand(100)
     plt.plot(random_numbers)
-    # st.pyplot(plt)
-    st.bokeh_chart(plt)
+    st.pyplot(plt)
 
 
 
