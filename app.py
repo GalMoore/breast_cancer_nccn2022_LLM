@@ -9,36 +9,9 @@ import openai
 import time
 import os
 
-if 'my_fave_number' in st.session_state:
-    st.write(st.session_state['my_fave_number'])
-else:
-    st.write("The variable 'my_fave_number' does not exist in session_state.")
-        
-if 'my_fave_number' not in st.session_state:
-        st.session_state['my_fave_number'] = 0
-        st.write("created my faev number")
-else:
-        st.write("couldnt create! ")
-
-
-st.session_state['my_fave_number'] = 2
-        
-st.title("Let's explores session states and callback functions")
-        
-##### file loading and graphs        
-# create session_state variable (onyl create if doesn't exist)
-if 'the_data_has_been_plotted' not in st.session_state:
-        st.session_state['the_data_has_been_plotted'] = False
-        st.write("shira is queen")
-else:
-        st.write("plot==True")
-
-
+st.title("Let's explores session states and callback functions") 
 uploaded_files = st.sidebar.file_uploader("",accept_multiple_files=True, type=['pdf'])
-st.write("uploaded_files",uploaded_files)
-# st.write(uploaded_files)
-
-if uploaded_files and st.session_state['the_data_has_been_plotted'] == False:
+if uploaded_files:
         data = []
         filenames = []
         st.sidebar.write("You have uploaded the following files:")
@@ -52,19 +25,11 @@ if uploaded_files and st.session_state['the_data_has_been_plotted'] == False:
                 data.append(text)
                 filenames.append(file.name)
 
-# if st.session_state['plotted_data'] != data:    
         time.sleep(5)
-        st.write(data[0][:50])
+        st.write(st.session_state['my_data'][0][:50])
         random_numbers = np.random.rand(100)
         plt.plot(random_numbers)
-        # data has been plot
-        st.session_state['the_data_has_been_plotted'] = True
-
-st.pyplot(plt)
-
-
-# st.write(st.session_state)
-
+        st.pyplot(plt)
 
 openai.api_key = st.secrets["openai_password"]
 
