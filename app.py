@@ -42,7 +42,7 @@ if st.session_state['plotted_data'] != data:
         # data that has been plot
         st.session_state['plotted_data'] = data
 
-st.write(st.session_state)
+# st.write(st.session_state)
 
 
 openai.api_key = st.secrets["openai_password"]
