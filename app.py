@@ -64,13 +64,14 @@ if uploaded_files:
         data.append(text)
         filenames.append(file.name)
         
-# random_numbers = np.random.rand(100)
-# if data:
-#     time.sleep(5)
-#     st.write(data[0][:50])
-#     random_numbers = np.random.rand(100)
-#     plt.plot(random_numbers)
-#     st.pyplot(plt)
+random_numbers = np.random.rand(100)
+if data:
+    time.sleep(5)
+    st.write(data[0][:50])
+    random_numbers = np.random.rand(100)
+    plt.plot(random_numbers)
+    # st.pyplot(plt)
+    st.bokeh_chart(plt)
 
 
 
