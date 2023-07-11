@@ -44,9 +44,9 @@ if prompt := st.chat_input("What is up?"):
         message_placeholder.markdown(full_response)
     st.session_state.messages.append({"role": "assistant", "content": full_response})
 
-print(prompt)
+st.write(prompt)
 # see the session state update live
-st.write(st.session_state)
+# st.write(st.session_state)
 
 # uploaded_files = st.sidebar.file_uploader("",accept_multiple_files=True, type=['pdf'])
 # data = []
