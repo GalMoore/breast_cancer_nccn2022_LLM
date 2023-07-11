@@ -3,41 +3,31 @@ import pandas as pd
 import numpy as np 
 import matplotlib.pyplot as plt
 import os
-import streamlit as st 
 import PyPDF2
 from io import BytesIO
 import openai
 import time
-import matplotlib.pyplot as plt
-import numpy as np
-
 
 st.title("Let's explores session states and callback functions")
 
-# Create a 4x4 numpy array with random numbers
+if 'number_of_rows' not in st.session_state:
+        st.session_state['number_of_rows'] = 5
+        
 data = np.random.rand(4, 4)
-
-# Create a pandas DataFrame
 df = pd.DataFrame(data, columns=['A', 'B', 'C', 'D'])
 
 increment = st.button("show more columns")
 if increment:
-        random_numbers = np.random.rand(100)
-        # if df.empty:
-        # time.sleep(5)
-        # st.write(data[0][:50])
-        random_numbers = np.random.rand(100)
-        plt.plot(random_numbers)
-        st.pyplot(plt)
+        st.session_state.number_of_rows += 1
 
-# import os
-# import streamlit as st 
-# import PyPDF2
-# from io import BytesIO
-# import openai
-# import time
-# import matplotlib.pyplot as plt
-# import numpy as np
+decrement = st.button("Show fewer columns")
+if decrement:
+        st.session_state.number_of_rows -=1
+
+st.table(df.head(st.sesssion_state['number_of_rows']))
+
+
+
 
 # openai.api_key = st.secrets["openai_password"]
 
