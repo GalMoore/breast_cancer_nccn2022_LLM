@@ -31,6 +31,7 @@ st.write(decrement)
 if decrement:
         st.session_state.number_of_rows -=1
 
+# only display the table after variable for head was updated
 st.table(df.head(st.session_state['number_of_rows']))
 
 # see the session state update live
