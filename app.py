@@ -11,30 +11,10 @@ import time
 st.title("Let's explores session states and callback functions")
 
 # create session_state variable (onyl create if doesn't exist)
-if 'number_of_rows' not in st.session_state:
-        st.session_state['number_of_rows'] = 5
-        
-data = np.random.rand(10, 4)
-df = pd.DataFrame(data, columns=['A', 'B', 'C', 'D'])
+if 'plots' not in st.session_state:
+        st.session_state['plots'] = False
 
-# if this button click is the last thing that happened:
-# it becomes true so increase variable that will change df.head() below
-# after a few minutes, the st.button bool turns back to false 
-increment = st.button("show more columns")
-st.write(increment)
-if increment:
-        st.session_state.number_of_rows += 1
 
-# if this button click is the last thing that happened:
-# it becomes true so decrement variable that will change df.head() below
-# after a few minutes, the st.button bool turns back to false 
-decrement = st.button("Show fewer columns")
-st.write(decrement)
-if decrement:
-        st.session_state.number_of_rows -=1
-
-# only display the table after variable for head was updated
-st.table(df.head(st.session_state['number_of_rows']))
 
 # see the session state update live
 st.write(st.session_state)
@@ -251,3 +231,35 @@ st.write(st.session_state)
 # #         search = store.similarity_search_with_score(prompt) 
 # #         # Write out the first 
 # #         st.write(search[0][0].page_content) 
+
+
+
+
+# SESSION STATE TUTORIAL
+
+
+# # create session_state variable (onyl create if doesn't exist)
+# if 'number_of_rows' not in st.session_state:
+#         st.session_state['number_of_rows'] = 5
+        
+# data = np.random.rand(10, 4)
+# df = pd.DataFrame(data, columns=['A', 'B', 'C', 'D'])
+
+# # if this button click is the last thing that happened:
+# # it becomes true so increase variable that will change df.head() below
+# # after a few minutes, the st.button bool turns back to false 
+# increment = st.button("show more columns")
+# st.write(increment)
+# if increment:
+#         st.session_state.number_of_rows += 1
+
+# # if this button click is the last thing that happened:
+# # it becomes true so decrement variable that will change df.head() below
+# # after a few minutes, the st.button bool turns back to false 
+# decrement = st.button("Show fewer columns")
+# st.write(decrement)
+# if decrement:
+#         st.session_state.number_of_rows -=1
+
+# # only display the table after variable for head was updated
+# st.table(df.head(st.session_state['number_of_rows']))
